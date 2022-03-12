@@ -129,69 +129,6 @@ function Login() {
                                     className={classes.inputItem}
                                 >
                                     <Typography variant="h6">
-                                        Firstname
-                                    </Typography>
-                                </Grid>
-                                <Grid
-                                    container
-                                    item
-                                    xs={12}
-                                    className={classes.inputItem}
-                                >
-                                    <Input
-                                        placeholder="firstname"
-                                        className={classes.inputBox}
-                                        value={controller.firstName}
-                                        onChange={e => controller.setFirstName(e.target.value)}
-                                        required
-                                        
-                                    />
-                                </Grid>
-                            </Grid>
-                            <Grid
-                                container
-                                item
-                                xs={12}
-                                className={classes.inputGroup}
-                            >
-                                <Grid
-                                    container
-                                    item
-                                    xs={12}
-                                    className={classes.inputItem}
-                                >
-                                    <Typography variant="h6">
-                                        Lastname
-                                    </Typography>
-                                </Grid>
-                                <Grid
-                                    container
-                                    item
-                                    xs={12}
-                                    className={classes.inputItem}
-                                >
-                                    <Input
-                                        placeholder="lastname"
-                                        className={classes.inputBox}
-                                        value={controller.lastName}
-                                        onChange={e => controller.setLastName(e.target.value)}
-                                        required
-                                    />
-                                </Grid>
-                            </Grid>
-                            <Grid
-                                container
-                                item
-                                xs={12}
-                                className={classes.inputGroup}
-                            >
-                                <Grid
-                                    container
-                                    item
-                                    xs={12}
-                                    className={classes.inputItem}
-                                >
-                                    <Typography variant="h6">
                                         Email
                                     </Typography>
                                 </Grid>

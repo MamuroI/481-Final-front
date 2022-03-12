@@ -12,12 +12,6 @@ class Controller {
         this.currentForm = context.currentForm
         this.setCurrentForm = context.setCurrentForm
 
-        this.firstName = context.firstName
-        this.setFirstName = context.setFirstName
-
-        this.lastName = context.lastName
-        this.setLastName = context.setLastName
-
         this.email = context.email
         this.setEmail = context.setEmail
 
@@ -35,8 +29,6 @@ class Controller {
 
 export function LoginProvider({ children }) {
     const [currentForm, setCurrentForm] = useState(0);
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
     const [userName, setUserName] = useState('')
     const [passWord, setPassWord] = useState('')
@@ -48,9 +40,7 @@ export function LoginProvider({ children }) {
 
         }
         console.log(data)
-        client.post('/login',
-            data
-        )
+        client.post('/login',data)
             .then(res => {
                 localStorage.setItem('token', res.data.access_token)
                 localStorage.setItem('user', res.data.user)
@@ -63,8 +53,6 @@ export function LoginProvider({ children }) {
 
     function handleRegister(){
         const data = {
-            firstname: this.firstName,
-            lastname: this.lastName,
             email: this.email,
             username: this.userName,
             password: this.passWord
@@ -76,7 +64,7 @@ export function LoginProvider({ children }) {
                 window.location.reload(false)
             })
             .catch(err =>{
-                // console.log(err)
+                console.log(err)
             })
     }
 
@@ -85,8 +73,6 @@ export function LoginProvider({ children }) {
             value={{
                 currentForm,
                 setCurrentForm,
-                firstName,setFirstName,
-                lastName,setLastName,
                 email,setEmail,
                 userName,setUserName,
                 passWord,setPassWord,
