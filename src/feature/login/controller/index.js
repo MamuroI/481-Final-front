@@ -48,10 +48,12 @@ export function LoginProvider({ children }) {
 
         }
         console.log(data)
-        client.post('/auth',data)
+        client.post('/login',
+            data
+        )
             .then(res => {
-                localStorage.setItem('token', res.data.token)
-                localStorage.setItem('user', JSON.stringify(res.data.user))
+                localStorage.setItem('token', res.data.access_token)
+                localStorage.setItem('user', res.data.user)
                 window.location.reload(false)
             })
             .catch(err => {
