@@ -6,20 +6,19 @@ export const client = axios.create({
     baseURL: URL,
 })
 
-const getStock = (token) => {
-    return client.get(`/stock`,{
+
+const getFav = (token) => {
+    return client.get(`/getFav`,{
         headers: {
             Authorization: `Bearer ${token}`
         }
     })
 }
 
-const buyCoin = (token, data) => {
-    console.log('api data',data)
-    return client.post(`/buy`,
+const addFav = (token, data) => {
+    return client.post(`/addFav`,
         {
-            id: data.userid,
-            coinAmount: data.selectBuyAmount
+            "recipeIndex": data.index
         },
         {
             headers: {
@@ -32,20 +31,26 @@ const buyCoin = (token, data) => {
     
 }
 
-const getInfo = (token,id) => {
-    return client.get(`/getInfo/${id}`,{
-        headers: {
-            Authorization: `Bearer ${token}`
+const removeFav = (token, index) => {
+    return client.post(`/removeFav`,
+        {
+            "recipeIndex": index
+        },
+        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
         }
-    })
+    );
+    
 }
 
-const sellCoin = (token, data) => {
-    return client.post(`/sell`,
+const searchTitle = (token, data) => {
+    return client.post(`/searchTitle`,
     {
-        id: data.userid,
-        coinAmount: data.selectSellAmount,
-        money: data.perCoin
+        "query": data.query
     }, 
     {
         headers: {
@@ -56,4 +61,18 @@ const sellCoin = (token, data) => {
     })
 }
 
-export {getStock, buyCoin, getInfo, sellCoin};
+const searchIngredient = (token, data) => {
+    return client.post(`/searchIngredient`,
+    {
+        "query": data.query
+    }, 
+    {
+        headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+    })
+}
+
+export {getFav, addFav, removeFav, searchTitle, searchIngredient};
