@@ -8,6 +8,8 @@ import Input from "../../../components/input";
 function Home() {
     const classes = useStyles();
     const controller = useController();
+    console.log(controller.favList);
+
     return (
         <>
             <Grid container className={classes.body}>
@@ -20,6 +22,93 @@ function Home() {
                         Logout
                     </Button>
                 </Grid>
+                <Grid container item xs={12} className={classes.searchBox}>
+                    <Input
+                        placeholder="search for something"
+                        className={classes.inputBox}
+                        value={controller.searchText}
+                        onChange={(e) =>
+                            controller.setSearchText(e.target.value)
+                        }
+                        required
+                    />
+                </Grid>
+                <Grid container item xs={12} className={classes.btnGroup}>
+                    <Grid container item xs={3} justifyContent="center">
+                        <Button
+                            variant="contained"
+                            className={classes.button}
+                            onClick={() => controller.handleSearchTitle()}
+                        >
+                            Search Title
+                        </Button>
+                    </Grid>
+                    <Grid container item xs={3} justifyContent="center">
+                        <Button
+                            variant="contained"
+                            className={classes.button}
+                            onClick={() => controller.handleSearchIngredient()}
+                        >
+                            Search Ingredient
+                        </Button>
+                    </Grid>
+                    <Grid container item xs={3} justifyContent="center">
+                        <Button
+                            variant="contained"
+                            className={classes.button}
+                            onClick={() => controller.handleGetFav()}
+                        >
+                            Get Favorite
+                        </Button>
+                    </Grid>
+                    <Grid container item xs={3} justifyContent="center">
+                        <Button
+                            variant="contained"
+                            className={classes.button}
+                            onClick={() => controller.handleSearchFav()}
+                        >
+                            Search Favorite
+                        </Button>
+                    </Grid>
+                </Grid>
+
+                <Grid container item xs={12} className={classes.showFav}>
+                    {controller.favList?.map((item, index) => {
+                        return (
+                            <Grid
+                                container
+                                item
+                                justifyContent="center"
+                                alignItems="center"
+                                className={classes.tableBox}
+                            >
+                                <Grid
+                                    container
+                                    item
+                                    xs={12}
+                                    justifyContent="flex-end"
+                                >
+                                    <Typography 
+                                        className={classes.deleteBtn}
+                                        onClick={() => controller.handleRemoveFav(item.index)}
+                                    >
+                                        Delete
+                                    </Typography>
+                                </Grid>
+                                <Typography variant="h4">
+                                    {item.Title}
+                                </Typography>
+                                {/* <img src={require(`../../../assets/images/${item.Image_Name}.jpg`)} className={classes.image} /> */}
+                                <Typography className={classes.textSizep}>
+                                    {item.Ingredients}
+                                </Typography>
+                                <Typography className={classes.textSizep}>
+                                    {item.Instructions}
+                                </Typography>
+                            </Grid>
+                        );
+                    })}
+                </Grid>
             </Grid>
         </>
     );
@@ -31,21 +120,57 @@ const useStyles = makeStyles((theme) => ({
         // backgroundSize: "cover",
         // backgroundRepeat: "no-repeat",
         // backgroundPosition: "center",
-        height: "100vh",
+        height: "auto",
         justifyContent: "center",
     },
     logoutBox: {
         height: 50,
-        justifyContent: 'flex-end',
-        margin: '15px 15px 0 0'
+        justifyContent: "flex-end",
+        margin: "15px 15px 0 0",
     },
-    logoutBtn:{
-        color: 'white',
-        background: 'black',
+    logoutBtn: {
+        color: "white",
+        background: "black",
         borderRadius: 6,
         height: 50,
         width: 100,
-        
+    },
+    searchBox: {
+        justifyContent: "center",
+    },
+    inputBox: {
+        width: 800,
+    },
+    button: {
+        color: "white",
+        background: "red",
+        borderRadius: 6,
+        height: 50,
+        width: "70%",
+        marginTop: 30,
+    },
+    tableBox: {
+        background: "lightblue",
+        borderRadius: 10,
+        width: 700,
+        height: "auto",
+        margin: 30,
+        padding: 20,
+    },
+    image: {
+        width: 300,
+        height: 200,
+    },
+    showFav: {
+        margin: 30,
+        justifyContent: "space-around",
+    },
+    textSizep: {
+        fontSize: 16,
+    },
+    deleteBtn:{
+        color: 'red',
+        cursor: 'pointer'
     }
 }));
 

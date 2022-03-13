@@ -31,10 +31,10 @@ const addFav = (token, data) => {
     
 }
 
-const removeFav = (token, index) => {
+const removeFav = (token, data) => {
     return client.post(`/removeFav`,
         {
-            "recipeIndex": index
+            "recipeIndex": data.index
         },
         {
             headers: {
@@ -75,4 +75,18 @@ const searchIngredient = (token, data) => {
     })
 }
 
-export {getFav, addFav, removeFav, searchTitle, searchIngredient};
+const searchFav = (token, data) => {
+    return client.post(`/searchFav`,
+    {
+        "query": data.query
+    }, 
+    {
+        headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+    })
+}
+
+export {getFav, addFav, removeFav, searchTitle, searchIngredient, searchFav};
