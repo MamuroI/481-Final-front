@@ -8,7 +8,6 @@ import Input from "../../../components/input";
 function Home() {
     const classes = useStyles();
     const controller = useController();
-    console.log(controller.favList);
 
     return (
         <>
@@ -81,6 +80,7 @@ function Home() {
                                 justifyContent="center"
                                 alignItems="center"
                                 className={classes.tableBox}
+                                key={index}
                             >
                                 <Grid
                                     container
