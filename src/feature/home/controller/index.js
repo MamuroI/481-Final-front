@@ -17,8 +17,8 @@ class Controller {
 
         this.result = context.result;
 
-        this.favList = context.favList;
-
+        this.favOption = context.favOption
+        this.setFavOption = context.setFavOption
     }
     
     handleLogout() {
@@ -40,6 +40,7 @@ class Controller {
             .then(res => {
                 console.log(res)
                 this.setResult(res.data)
+                this.setFavOption(0)
             })
             .catch(err =>{
                 console.log(err)
@@ -55,26 +56,23 @@ class Controller {
             .then(res => {
                 console.log(res)
                 this.setResult(res.data)
+                this.setFavOption(0)
             })
             .catch(err =>{
                 console.log(err)
             })
     }
 
-    setFavList(data){
-        this.context.setFavList(data)
-    }
-
     
-
-    handleAddFav(){
+    handleAddFav(index){
         const data = {
-            index: this.someting,
+            index: index.toString(),
         }
         console.log(data)
         addFav(localStorage.getItem('token'),data)
             .then(res => {
                 console.log(res)
+                window.location.reload(false);
             })
             .catch(err =>{
                 console.log(err)
@@ -100,7 +98,8 @@ class Controller {
         getFav(localStorage.getItem('token'))
             .then(res => {
                 console.log(res)
-                this.setFavList(res.data)
+                this.setResult(res.data)
+                this.setFavOption(1)
             })
             .catch(err =>{
                 console.log(err)
@@ -114,7 +113,8 @@ class Controller {
         searchFav(localStorage.getItem('token'),data)
             .then(res => {
                 console.log(res)
-                this.setFavList(res.data)
+                this.setResult(res.data)
+                this.setFavOption(1)
             })
             .catch(err =>{
                 console.log(err)
@@ -128,6 +128,7 @@ export function HomeProvider({ children }) {
     const [searchText, setSearchText] = useState('');
     const [result, setResult] = useState();
     const [favList, setFavList] = useState();
+    const [favOption, setFavOption] = useState(0);
 
     // useEffect(() => {
     //     getInfo(
@@ -149,7 +150,8 @@ export function HomeProvider({ children }) {
                 setUserId,   
                 searchText,setSearchText,
                 favList,setFavList,
-                result,setResult
+                result,setResult,
+                favOption,setFavOption
             }}
         >
             {children}

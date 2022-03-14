@@ -73,7 +73,7 @@ function Home() {
                 </Grid>
 
                 <Grid container item xs={12} className={classes.showFav}>
-                    {controller.favList?.map((item, index) => {
+                    {controller.result?.map((item, index) => {
                         return (
                             <Grid
                                 container
@@ -88,23 +88,53 @@ function Home() {
                                     xs={12}
                                     justifyContent="flex-end"
                                 >
-                                    <Typography 
-                                        className={classes.deleteBtn}
-                                        onClick={() => controller.handleRemoveFav(item.index)}
+                                    {
+                                        controller.favOption === 0?
+                                        <Typography
+                                        className={classes.addBtn}
+                                        onClick={() =>
+                                            controller.handleAddFav(
+                                                item.index
+                                            )
+                                        }
                                     >
-                                        Delete
+                                        Add Fav
                                     </Typography>
+                                        :
+                                        <Typography
+                                        className={classes.deleteBtn}
+                                        onClick={() =>
+                                            controller.handleRemoveFav(
+                                                item.index
+                                            )
+                                        }
+                                    >
+                                        Delete Fav
+                                    </Typography>
+                                    }
+                                    
                                 </Grid>
                                 <Typography variant="h4">
                                     {item.Title}
                                 </Typography>
-                                {/* <img src={require(`../../../assets/images/${item.Image_Name}.jpg`)} className={classes.image} /> */}
-                                <Typography className={classes.textSizep}>
-                                    {item.Ingredients}
-                                </Typography>
-                                <Typography className={classes.textSizep}>
-                                    {item.Instructions}
-                                </Typography>
+                                {/* <img src={require(`../../../assets/images/${item.Image_Name}.jpg`)} 
+                                className={classes.image} /> */}
+                                <Grid container item xs={12}>
+                                    <Typography className={classes.textSizeH}>
+                                        Ingredients
+                                    </Typography>
+                                    <Typography className={classes.textSizep}>
+                                        {item.Ingredients}
+                                    </Typography>
+                                </Grid>
+                                <Grid container item xs={12}>
+                                    <Typography className={classes.textSizeH}>
+                                        Instruction
+                                    </Typography>
+                                    <Typography className={classes.textSizep}>
+                                        {item.Instructions}
+                                    </Typography>
+                                </Grid>
                             </Grid>
                         );
                     })}
@@ -165,13 +195,21 @@ const useStyles = makeStyles((theme) => ({
         margin: 30,
         justifyContent: "space-around",
     },
+    textSizeH: {
+        fontSize: 18,
+        fontWeight: 600,
+    },
     textSizep: {
         fontSize: 16,
     },
-    deleteBtn:{
-        color: 'red',
-        cursor: 'pointer'
-    }
+    addBtn: {
+        color: "green",
+        cursor: "pointer",
+    },
+    deleteBtn: {
+        color: "red",
+        cursor: "pointer",
+    },
 }));
 
 export default withController(HomeProvider)(Home);
