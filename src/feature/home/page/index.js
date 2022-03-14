@@ -88,37 +88,40 @@ function Home() {
                                     xs={12}
                                     justifyContent="flex-end"
                                 >
-                                    {
-                                        controller.favOption === 0?
+                                    {controller.favOption === 0 ? (
                                         <Typography
-                                        className={classes.addBtn}
-                                        onClick={() =>
-                                            controller.handleAddFav(
-                                                item.index
-                                            )
-                                        }
-                                    >
-                                        Add Fav
-                                    </Typography>
-                                        :
+                                            className={classes.addBtn}
+                                            onClick={() =>
+                                                controller.handleAddFav(
+                                                    item.index
+                                                )
+                                            }
+                                        >
+                                            Add Fav
+                                        </Typography>
+                                    ) : (
                                         <Typography
-                                        className={classes.deleteBtn}
-                                        onClick={() =>
-                                            controller.handleRemoveFav(
-                                                item.index
-                                            )
-                                        }
-                                    >
-                                        Delete Fav
-                                    </Typography>
-                                    }
-                                    
+                                            className={classes.deleteBtn}
+                                            onClick={() =>
+                                                controller.handleRemoveFav(
+                                                    item.index
+                                                )
+                                            }
+                                        >
+                                            Delete Fav
+                                        </Typography>
+                                    )}
                                 </Grid>
                                 <Typography variant="h4">
                                     {item.Title}
                                 </Typography>
-                                {/* <img src={require(`../../../assets/images/${item.Image_Name}.jpg`)} 
-                                className={classes.image} /> */}
+                                <Grid container item xs={12} justifyContent="center">
+                                    <img
+                                        src={require(`../../../assets/images/${item.Image_Name}.jpg`)}
+                                        className={classes.image}
+                                    />
+                                </Grid>
+
                                 <Grid container item xs={12}>
                                     <Typography className={classes.textSizeH}>
                                         Ingredients
